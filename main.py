@@ -28,6 +28,8 @@ def main():
     shutil.copyfile(SRC, DST)
     # Guard the determinism requirement: the written bytes must be an
     # exact copy of the repository-held image, every run.
+    # Fail loudly instead of shipping a bad entry: a mismatched output
+    # means the copy step broke and the entry would be invalid.
     assert _sha256(SRC) == _sha256(DST), "output differs from source"
 
 
